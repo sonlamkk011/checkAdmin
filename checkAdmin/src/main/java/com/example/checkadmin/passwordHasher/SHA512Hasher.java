@@ -1,11 +1,12 @@
 package com.example.checkadmin.passwordHasher;
 
-import java.security.MessageDigest;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 public class SHA512Hasher {
+
     // hàm băm mật khẩu, tham số là mật khẩu nguyên bản và muối.
     public static String encode(String passwordToHash, String saltString){
         byte[] salt = saltString.getBytes();
@@ -26,7 +27,7 @@ public class SHA512Hasher {
         return generatedPassword;
     }
 
-    public static boolean checkPassword(String passwordHash, String originalPassword){
+    public static boolean checkPassword(String passwordHash, String originalPassword, String salt){
         String generatedHash = encode(originalPassword, salt);
         return passwordHash.equals(generatedHash);
     }
@@ -40,4 +41,5 @@ public class SHA512Hasher {
             sb.append(AB.charAt(rnd.nextInt(AB.length())));
         return sb.toString();
     }
+
 }
